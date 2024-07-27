@@ -1,0 +1,43 @@
+echo "🚀 Kicking off pre-commit checks: Code Styling, Linting, Type-checking, and Building. 🚀"
+
+# Check Prettier Standards
+npm run format:check ||
+(
+    echo "❌ Prettier Check Failed: 😬
+Your code styling doesn't meet the project guidelines.
+Run \"npm run format\", stage your changes, and try again. 👨‍💻"
+    exit 1
+)
+
+# Check ESLint Standards
+npm run lint ||
+(
+    echo "❌ ESLint Check Failed: 🚨
+Your code contains lint errors or warnings.
+Please fix them as indicated above, stage your changes, and try again. 🛠"
+    exit 1
+)
+
+# Check TypeScript Types
+npm run type:check ||
+(
+    echo "❌ TypeScript Type Check Failed: 📝
+Your code has type errors.
+Fix them as outlined above, stage your changes, and try again. 🧐"
+    exit 1
+)
+
+# Attempt to Build the Project
+echo "🔨 Running build check: Attempting to build the project. 🏗"
+
+npm run build ||
+(
+    echo "❌ Build Failed: 💔
+There was an error building the project.
+Review the errors above, make the necessary adjustments, and try again. 🤔"
+    exit 1
+)
+
+# If all checks pass, proceed with the commit
+echo "✅ All pre-commit checks passed! 🎉
+Your code is ready for the limelight. Proceeding with commit. 🚀"
